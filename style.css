@@ -1,0 +1,86 @@
+@import url(https://fonts.googleapis.com/css?family=Righteous);
+
+li {
+	list-style-type:none;
+}
+
+.instructions {
+	font-family: Righteous;
+	font-size:20px;
+	padding:.5em;
+	margin:1em;
+}
+
+.navBar {
+	display:flex;
+	background:black;
+	width:auto;
+	height:75px;
+}
+
+.line_wrapper{
+	display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.logo_wrapper{
+	display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.line {
+	border-left:1px solid white;
+	color:white;
+	padding:10px;
+	margin-left:15px;
+	font-family:Righteous;
+	font-size:20px;
+	padding-top:6px;
+
+}
+
+.image {
+	margin-left:125px;
+}
+
+.search {
+	font-family:Righteous;
+	font-size:20px;
+	width:463px;
+	text-align:center;
+}
+
+body {
+	background-color:#f2f2f2;
+	width:auto;
+	margin:auto;
+}
+
+#background {
+	background-color:#f8f8f8;
+	text-align:center;
+}
+
+
+a {
+	list-style-type:none;
+	text-decoration:none;
+	color:black;
+}
+
+.song_list {
+	display:none;
+	text-align:center;
+	size:30px;
+}
+
+.search_text {
+	padding:1em;
+}
+
+.purpose, .directions {
+	margin:0px 500px 0px;
+	padding:10px;
+}
