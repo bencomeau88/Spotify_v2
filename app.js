@@ -88,6 +88,9 @@ $(document).ready(function() {
                             }
 
                             // function calls
+                            $('.cd_content').on('click',function(){
+                            	$('.modal').css('display', 'block');
+                            })                            
                             get_artist_data(user_input); clear();
                         })
                     // end of code

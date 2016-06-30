@@ -1,5 +1,32 @@
 @import url(https://fonts.googleapis.com/css?family=Righteous);
 
+.modal {
+    color: #fff;
+    background: white;
+    position: absolute;
+    top: 0;
+    left: 203px;
+    margin: 170px;
+    z-index: 1000;
+    display:none;
+    padding:2em;
+    text-align:center;
+    font-family:Righteous;
+}
+
+.content {
+    color: #fff;
+    background: grey;
+    position: relative;
+    height: auto;
+    width: 600px;
+    border-radius: 3px;
+    top: 15%;
+    margin: auto auto;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
 li {
 	list-style-type:none;
 }
