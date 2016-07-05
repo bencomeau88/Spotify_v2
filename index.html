@@ -1,48 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>Spotify API</title>
-	<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Spotify API</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="jquery-ui-1.11.4.custom/jquery-ui.css">
+    <link rel="stylesheet" href="fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen">
+    <link rel="stylesheet" href="fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen">
+    <link rel="stylesheet" href="fancybox/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
-    <link rel='shortcut icon' href='images/spotify.png' type='image/x-icon'/ >
+    <link rel='shortcut icon' href='images/spotify.png' type='image/x-icon' />
 </head>
+
 <body>
-<div class="navBar">
-	<div class="logo_wrapper">
-<a href="#">
-	<img src="images/spotify.png" alt="HELLO!" class="image" height="70" width="70">
-</a>
-	</div>
-	<div class="line_wrapper">
-	<span class="line">Spotify</span>
-	</div>
-</div>
-	<div id="background">
-	<button class="cd_content">SHOW</button>
-		<div class="instructions">
-			<h2 class='purpose banner'>What is This?</h2>
-			<p class="purpose">This is an App that allows you to search for any Artist then displays their songs and organizes their music by catagories such as 'Dancibility', and 'Popularity'. </p> <p class='directions'> <em>To get started, simply type the Artist you are interested in into the search bar then hit 'enter'.</em></p>
-		</div>
-		<form class="search_text">
-			<input type="text" class="artist search" placeholder="Type Your Favorite Artist Here and Press 'Enter'">
-		</form>
-
-	</div>
-	<div class="results" style='font-family:righteous;font-size:40px'>
-			HERE ARE THE RESULTS:
-
-	</div>
-	
-	<div class='modal' id='modal'>
-            <div class="content">
-                    <a class="close" href="#">Got It? [X]</a>
-                </div>
-            </div>
+    <div class="navBar">
+        <div class="logo_wrapper">
+            <a href="#">
+                <img src="images/spotify.png" alt="HELLO!" class="image" height="70" width="70">
+            </a>
         </div>
-	
-	<script src="jquery-ui-1.11.4.custom/external/jquery/jquery.js"></script>
+        <div class="line_wrapper">
+            <span class="line">Spotify</span>
+        </div>
+    </div>
+    <div id="background">
+        <button class="cd_content">SHOW</button>
+        <div class="instructions">
+            <h2 class='purpose banner'>What is This?</h2>
+            <p class="purpose">This is an App that allows you to search for any Artist then displays their songs and organizes their music by catagories such as 'Dancibility', and 'Popularity'. </p>
+            <p class='directions'> <em>To get started, simply type the Artist you are interested in into the search bar then hit 'enter'.</em></p>
+        </div>
+        <form class="search_text">
+            <input type="text" class="artist search" placeholder="Type Your Favorite Artist Here and Press 'Enter'">
+        </form>
+    </div>
+    <div class="results" style='font-family:righteous;font-size:40px'>
+        HERE ARE THE RESULTS:
+    </div>
+    <!-- <div class='fancybox'>
+        Look at this fancy-ass box
+    </div> -->
+    </div>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+     <script src="jquery-ui-1.11.4.custom/external/jquery/jquery.js"></script>
+    <!-- fancybox shit -->
+
+    <script type="text/javascript" src="fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+    <script type="text/javascript" src="fancybox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+
+   
     <script src="jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src='http://underscorejs.org/underscore-min.js'></script>
@@ -50,4 +57,5 @@
     <!-- <script src="app.js"></script> -->
     <script src='new.js'></script>
 </body>
-</html>s
+
+</html>

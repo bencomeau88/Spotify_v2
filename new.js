@@ -1,8 +1,16 @@
 $(document).ready(function() {
+    //function to play a random song from the selected album
+    var playRandom = function(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+	$('.fancybox').fancybox();   
+
     // beginning of code
     // once someone enters the artist they are searching for...
     // this prevents default, submits the input.val() and...
     // clears fields
+    
+
     $('.search_text').submit(function(e) {
         e.preventDefault();
         var user_input = $('.artist').val();
@@ -60,26 +68,45 @@ $(document).ready(function() {
         get_album_info.then(function(data) {
             data.albums.forEach(function(album, index) {
                 var album_cover = $('<li>' +
-                    '<a href="#">' +
+                    '<a class="fancybox" href="#">' +
                     '<img' + " src=" + album.images[1].url + '>' +
                     album.name +
                     '</a>' +
                     '</li>')
                 album_cover.on('click', function() {
-                	var preview_track = album.tracks.items[0].preview_url
+                	 var random = playRandom(0, album.tracks.items.length);
+                	 console.log(random);
+                    var preview_track = album.tracks.items[random].preview_url
                     preview_audio = new Audio(preview_track);
                     preview_audio.play();
+
+
+                    var album_tracks = album.tracks.items
+                    console.log(album_tracks);
+                    var track_ids = album_tracks.map(function(track){
+                    	return track.id;
+
+                    })
+                    console.log(track_ids);
+                    $.ajax({
+                    	url:"https://api.spotify.com/v1/audio-features",
+                    	data: {
+                    		ids:track_ids.join(',')
+                    	}
+                    }).then(function(data){
+                    	console.log(data);
+                    })
+
                 })
                 $('.results').append(album_cover);
             })
             console.log(data);
-            var preview_track = data.albums[0].tracks.items[0].preview_url;
-            console.log(preview_track);
-            var album_images = data.albums[0].images[1];
-            console.log(album_images);
-            var $album_info = $('a');
-
+             var full_albums = data.albums;
+             console.log(full_albums);
         })
-        
+     
+        })
+
+
     });
-});
+

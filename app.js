@@ -4,17 +4,47 @@ $(document).ready(function() {
             // this prevents default, submits the input.val() and...
             // clears fields
             $('.search_text').submit(function(e) {
+            	e.preventDefault();
                 var user_input = $('.artist').val();
                 var clear = function() {
                     $('.artist').val('');
-                }
-                e.preventDefault();
+                };
 
-                // $.ajax call to get artist searched for...
+                var get_artist = $.ajax({
+                	url: 'https://api.spotify.com/v1/search?',
+                	data: {
+                		type: 'artist',
+                		query: user_input
+                	}
+                });
+
+                var get_albums = get_artist.then(function(data){
+                	var artist = data.artists.item[0];
+                	console.log(artist);
+                	return $.ajax({
+                		url: 'https://api.spotify.com/v1/artists/' + artist.id + '/albums',
+                		data: {
+                			type: 'albums'
+                		}
+                	});
+                });
+                
+                var get_album_info = get_albums.then(function(data){
+                	var albums = data.items;
+                	albums = _.uniq(albums, false, function(album) {
+        			// using slice to match versions of the same album.
+        			return album.name.slice(0, 8).toLowerCase();
+                });
+
+                console.log(albums);
+
+            });
+
+                // $.ajax call to get artist searched for...          
                 // in the above form field
                 var get_artist_data = function(user_input) {
                         $.ajax({
-                            url: 'https://api.spotify.com/v1/search?	',
+                            url: 'https://api.spotify.com/v1/search?',
                             data: {
                                 type: 'artist',
                                 query: user_input
@@ -34,7 +64,7 @@ $(document).ready(function() {
                                     }
                                 }).then(function(data) {
                                         var albums = data.items;
-                                        albums = _.sortBy(albums, '')
+                                        // albums = _.sortBy(albums, '')
                                         albums = _.uniq(albums, false, function(album) {
                                             return album.name.slice(0, 8).toLowerCase() })
                                         for (i = 0; i < albums.length; i++) {
@@ -65,6 +95,7 @@ $(document).ready(function() {
                                                     $album_info.on('click',function(){
                                                     	preview_audio = new Audio(preview_tracks.preview_url);                                                   
                                                     	preview_audio.play();
+                                                    	
                                                     })
                                                 })
 
