@@ -3,7 +3,7 @@ $(document).ready(function() {
     var playRandom = function(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-	$('.fancybox').fancybox();   
+	  $('.fancybox').fancybox();
 
     // beginning of code
     // once someone enters the artist they are searching for...
@@ -67,42 +67,57 @@ $(document).ready(function() {
         });
         get_album_info.then(function(data) {
             data.albums.forEach(function(album, index) {
+            	
+            	console.log(album)
+                
                 var album_cover = $('<li>' +
-                    '<a class="fancybox" href="#">' +
+                    '<a class="link_click" href="#">' +
                     '<img' + " src=" + album.images[1].url + '>' +
                     album.name +
                     '</a>' +
                     '</li>')
+
+                var track_names = album.tracks.items.map(function(track){
+            		return track.name;
+            	})
+
                 album_cover.on('click', function() {
+                	var tracks = track_names.join('<br>')
+                	console.log(tracks);
+                	var album_tracks = $('<div class"album_tracks">' + '<li>' + '<a href="#">' + tracks + '</li>' + '<br>' + '</div>')
+                	$.fancybox({
+                		'content' : album_tracks.html()
+                	});
                 	 var random = playRandom(0, album.tracks.items.length);
                 	 console.log(random);
                     var preview_track = album.tracks.items[random].preview_url
-                    preview_audio = new Audio(preview_track);
-                    preview_audio.play();
+                    // preview_audio = new Audio(preview_track);
+                    // preview_audio.play();
 
 
-                    var album_tracks = album.tracks.items
-                    console.log(album_tracks);
-                    var track_ids = album_tracks.map(function(track){
-                    	return track.id;
+                    // var album_tracks = album.tracks.items
+                    // console.log(album_tracks);
+                    // var track_ids = album_tracks.map(function(track){
+                    // 	return track.id;
 
-                    })
-                    console.log(track_ids);
-                    $.ajax({
-                    	url:"https://api.spotify.com/v1/audio-features",
-                    	data: {
-                    		ids:track_ids.join(',')
-                    	}
-                    }).then(function(data){
-                    	console.log(data);
-                    })
+                    // })
+                    // AJAX USED TO GET AUDIO FEATURES, REQUIRES AUTH. TO CONTINUE
+                    // console.log(track_ids);
+                    // $.ajax({
+                    // 	url:"https://api.spotify.com/v1/audio-features",
+                    // 	data: {
+                    // 		ids:track_ids.join(',')
+                    // 	}
+                    // }).then(function(data){
+                    // 	console.log(data);
+                    // })
 
                 })
                 $('.results').append(album_cover);
+
             })
             console.log(data);
-             var full_albums = data.albums;
-             console.log(full_albums);
+             
         })
      
         })
