@@ -3,13 +3,27 @@ $(document).ready(function() {
     var playRandom = function(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-	  $('.fancybox').fancybox();
+    //  $("#fancy_popup").fancybox({
+    //     transitionIn    : 'elastic',
+    //     transitionOut   : 'elastic',
+    //     easingIn        : 'easeInSine',
+    //     easingOut       : 'easeOutSine',
+    //     speedIn         : 400,
+    //     speedOut        : 200,
+    //     titlePosition   : 'inside', 
+    //     titleFormat     : 'document.write("Fancy Box Title");',
+    //     cyclic          : true,
+    //     type            : "iframe",
+    //     width           : 640, // or whatever
+    //     height          : 320
+    // });
+    $('#fancy_popup').fancybox();
 
     // beginning of code
     // once someone enters the artist they are searching for...
     // this prevents default, submits the input.val() and...
     // clears fields
-    
+
 
     $('.search_text').submit(function(e) {
         e.preventDefault();
@@ -67,32 +81,50 @@ $(document).ready(function() {
         });
         get_album_info.then(function(data) {
             data.albums.forEach(function(album, index) {
-            	
-            	console.log(album)
-                
+
+                console.log(album);
+
                 var album_cover = $('<li>' +
                     '<a class="link_click" href="#">' +
                     '<img' + " src=" + album.images[1].url + '>' +
                     album.name +
                     '</a>' +
-                    '</li>')
-
-                var track_names = album.tracks.items.map(function(track){
-            		return track.name;
-            	})
+                    '</li>');
+                $('.results').append(album_cover);
+                
+                var track_names = album.tracks.items.map(function(track) {
+                    return track.name;
+                })
 
                 album_cover.on('click', function() {
-                	var tracks = track_names.join('<br>')
-                	console.log(tracks);
-                	var album_tracks = $('<div class"album_tracks">' + '<li>' + '<a href="#">' + tracks + '</li>' + '<br>' + '</div>')
-                	$.fancybox({
-                		'content' : album_tracks.html()
-                	});
-                	 var random = playRandom(0, album.tracks.items.length);
-                	 console.log(random);
-                    var preview_track = album.tracks.items[random].preview_url
-                    // preview_audio = new Audio(preview_track);
-                    // preview_audio.play();
+                    var tracks = track_names;
+                    console.log(tracks);
+    					for(i=0;i<tracks.length;i++){
+                        console.log(tracks[i]);
+                        var album_tracks = $('<div class"album_tracks">' + '<li>' +
+                            '<a rel="gallery" href="#">' + tracks[i] + '</li>' + '<br>' + '</div>');
+                        // $('#fancy_popup').append(album_tracks);
+                        // $('#fancy_popup').show();
+                        var album_tracks_html = $('.fancybox').append(album_tracks); 
+                        $.fancybox({
+                            'content': album_tracks_html
+                        });
+                    };
+
+                    
+               
+
+
+
+
+                          
+                        
+                   
+                    // var random = playRandom(0, album.tracks.items.length);
+                    // console.log(random);
+                    // var preview_track = album.tracks.items[random].preview_url
+                        // preview_audio = new Audio(preview_track);
+                        // preview_audio.play();
 
 
                     // var album_tracks = album.tracks.items
@@ -112,16 +144,15 @@ $(document).ready(function() {
                     // 	console.log(data);
                     // })
 
-                })
-                $('.results').append(album_cover);
+                });
+                
 
-            })
+            });
             console.log(data);
-             
-        })
-     
-        })
 
+        });
 
     });
 
+
+});
