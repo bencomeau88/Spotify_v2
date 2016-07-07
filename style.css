@@ -94,6 +94,9 @@ body {
 	text-align:center;
 }
 
+.tracks {
+	margin-bottom:1em;
+}
 
 a {
 	list-style-type:none;

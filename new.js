@@ -3,6 +3,18 @@ $(document).ready(function() {
     var playRandom = function(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
+    var now_playing = false;
+    var playUrl = function(url){
+    	// '!'='NOT'
+    	//if now_playing=true
+    	if(now_playing && !now_playing.paused){
+    		now_playing.pause();
+    	}
+    	//these are going to be run reguardless of "it" or "else"
+    		var preview_audio = new Audio(url);
+    		now_playing = preview_audio;
+        	now_playing.play();
+    }
     //  $("#fancy_popup").fancybox({
     //     transitionIn    : 'elastic',
     //     transitionOut   : 'elastic',
@@ -90,28 +102,30 @@ $(document).ready(function() {
                     album.name +
                     '</a>' +
                     '</li>');
-                $('.results').append(album_cover);
-                
-                var track_names = album.tracks.items.map(function(track) {
-                    return track.name;
-                })
-
-                album_cover.on('click', function() {
-                    var tracks = track_names;
+                $('.results').append(album_cover);                        
+                var tracks = album.tracks.items;                
+                album_cover.on('click', function() {                    
                     console.log(tracks);
     					for(i=0;i<tracks.length;i++){
-                        console.log(tracks[i]);
-                        var album_tracks = $('<div class"album_tracks">' + '<li>' +
-                            '<a rel="gallery" href="#">' + tracks[i] + '</li>' + '<br>' + '</div>');
+    						var track = tracks[i];
+                        console.log(track);
+                        var album_track = $('<li class="tracks">' +
+                            '<a rel="gallery" href="#" data-url="' + track.preview_url + '">' + 
+                            track.name +
+                            '</a>' +
+                            '</li>');
                         // $('#fancy_popup').append(album_tracks);
                         // $('#fancy_popup').show();
-                        var album_tracks_html = $('.fancybox').append(album_tracks); 
+                        var album_tracks_html = $('.fancybox').append(album_track); 
                         $.fancybox({
                             'content': album_tracks_html
                         });
-                        album_tracks.on('click', function(){
-                        	console.log($(this));
+                        album_track.on('click', function(){
+                        	// to target (.find()) the <a> inside of the $(this) which is the <li>
+                        	var preview_track = ($(this).find('a').data("url"));                      
+                        	playUrl(preview_track);                        	                       
                         })
+
                     };
 
                     
