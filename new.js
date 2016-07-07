@@ -109,6 +109,9 @@ $(document).ready(function() {
                         $.fancybox({
                             'content': album_tracks_html
                         });
+                        album_tracks.on('click', function(){
+                        	console.log($(this));
+                        })
                     };
 
                     
