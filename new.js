@@ -3,6 +3,7 @@ $(document).ready(function() {
     var playRandom = function(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
+    var click_count = 0;
     var now_playing = false;
     var playUrl = function(url){
     	// '!'='NOT'
@@ -123,7 +124,8 @@ $(document).ready(function() {
                         album_track.on('click', function(){
                         	// to target (.find()) the <a> inside of the $(this) which is the <li>
                         	var preview_track = ($(this).find('a').data("url"));                      
-                        	playUrl(preview_track);                        	                       
+                        	playUrl(preview_track); 
+                        	                       	                       
                         })
 
                     };
